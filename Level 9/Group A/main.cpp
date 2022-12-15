@@ -4,10 +4,6 @@
 
 // declarationf for the main function
 int main() {
-    // using namespace Batch1;
-    // using namespace Batch2;
-    // using namespace Batch3;
-    // using namespace Batch4;
     char call_type = 'C';
     char put_type = 'P'; // set type parameters
 
@@ -19,7 +15,7 @@ int main() {
         using namespace Batch1;
         EUoption EUcall(K, T, r, sig, call_type);
         EUoption EUput(K, T, r, sig, put_type);
-        // For outputing the Clal
+        // For outputting the Call Price
         std::cout << "Call-option price: " << EUcall.Price(S) << ",Put-option price: " << EUput.Price(S) << "\n";
 
         // put-call parity test, all 4 batches passed
@@ -29,7 +25,7 @@ int main() {
 
         // struct version of each function
         std::cout << "Struct Test:\n";
-        OptionData OptD; // create an object of struct OptionData
+        OptionData OptD{}; // create an object of struct OptionData
         OptD.K = K;
         OptD.T = T;
         OptD.r = r;
@@ -50,7 +46,7 @@ int main() {
         using namespace Batch2;
         EUoption EUcall(K, T, r, sig, call_type);
         EUoption EUput(K, T, r, sig, put_type);
-        // For outputing the Clal
+        // For outputting the Call Price
         std::cout << "Call-option price: " << EUcall.Price(S) << ",Put-option price: " << EUput.Price(S) << "\n";
 
         // put-call parity test, all 4 batches passed
@@ -60,7 +56,7 @@ int main() {
 
         // struct version of each function
         std::cout << "Struct Test:\n";
-        OptionData OptD; // create an object of struct OptionData
+        OptionData OptD{}; // create an object of struct OptionData
         OptD.K = K;
         OptD.T = T;
         OptD.r = r;
@@ -81,7 +77,7 @@ int main() {
         using namespace Batch3;
         EUoption EUcall(K, T, r, sig, call_type);
         EUoption EUput(K, T, r, sig, put_type);
-        // For outputing the Clal
+        // For outputting the Call Price
         std::cout << "Call-option price: " << EUcall.Price(S) << ",Put-option price: " << EUput.Price(S) << "\n";
 
         // put-call parity test, all 4 batches passed
@@ -91,7 +87,7 @@ int main() {
 
         // struct version of each function
         std::cout << "Struct Test:\n";
-        OptionData OptD; // create an object of struct OptionData
+        OptionData OptD{}; // create an object of struct OptionData
         OptD.K = K;
         OptD.T = T;
         OptD.r = r;
@@ -112,7 +108,7 @@ int main() {
         using namespace Batch4;
         EUoption EUcall(K, T, r, sig, call_type);
         EUoption EUput(K, T, r, sig, put_type);
-        // For outputing the Clal
+        // For outputting the Call Price
         std::cout << "Call-option price: " << EUcall.Price(S) << ",Put-option price: " << EUput.Price(S) << "\n";
 
         // put-call parity test, all 4 batches passed
@@ -122,7 +118,7 @@ int main() {
 
         // struct version of each function
         std::cout << "Struct Test:\n";
-        OptionData OptD; // create an object of struct OptionData
+        OptionData OptD{}; // create an object of struct OptionData
         OptD.K = K;
         OptD.T = T;
         OptD.r = r;
@@ -137,83 +133,124 @@ int main() {
         PCParity(OptD, S, C1, call_type); // test struct version
         PCParity(OptD, S, P1, put_type); // test struct version
         std::cout << "\n"; // print a new line
-
-        std::cout << "A1 c) using batch 4\n";
-        // partd declare the neccessary containers of conditions
-        std::vector<double> StockP = CutVec(10, 1, 50); // call Cut()
-        std::vector<double> ExpTime = CutVec(0.25, 0.25, 50); // Call Cut()
-        std::vector<double> Volatility = CutVec(0.01, 0.001, 50); // Call Cut()
-
-        // containers of results
-        std::vector<double> Output1;
-        Output1.reserve(50); // reserve places for elements
-        std::vector<double> Output2;
-        Output2.reserve(50); // reserve places for elements
-
-        // calculate option price for different stock prices (other parameters in batches remain the same as before)
-        std::cout << "Option price for different stock price:\n";
-        for (int i = 0; i != 50; i++) {
-            Output1.push_back(BSCallPrice(OptD, StockP[i])); // calculate call price
-            Output2.push_back(BSPutPrice(OptD, StockP[i])); // calculate put price
-            std::cout << "Stock Price: " << StockP[i] << ", Call Price: " << Output1[i] << ", Put Price:" << Output2[i]
-                      << "\n"; // print the results
-        }
-        Output1.clear();
-        Output2.clear();
-        std::cout << "\n";
-
-        // calculate option price for different time to maturity (other parameters in batches remain the same as before)
-        std::cout << "Option price for different time to maturity:\n";
-        for (int i = 0; i != 50; i++) {
-            OptD.T = ExpTime[i];
-            Output1.push_back(BSCallPrice(OptD, S)); // calculate call price
-            Output2.push_back(BSPutPrice(OptD, S)); // calculate put price
-            std::cout << "ExpTime to Maturity: " << ExpTime[i] << ", Call Price: " << Output1[i]
-                      << ", Put Price:" << Output2[i] << "\n"; // print the results
-        }
-        Output1.clear();
-        Output2.clear();
-        std::cout << "\n";
-
-        // calculate option price for different volatility with other param not changed
-        std::cout << "Option price for different stock price volatility:\n";
-        for (int i = 0; i != 50; i++) {
-            OptD.sig = Volatility[i];
-            Output1.push_back(BSCallPrice(OptD, S)); // calculate call price
-            Output2.push_back(BSPutPrice(OptD, S)); // calculate put price
-            std::cout << "Volatility: " << Volatility[i] << ", Call Price: " << Output1[i]
-                      << ", Put Price:" << Output2[i] << "\n"; // print the results
-        }
-        Output1.clear();
-        Output2.clear();
-        std::cout << "\n";
     }
+
+    std::cout << "A1 c)\n";
+    OptionData OptD{}; // create an object of struct OptionData
+    OptD.K = Batch1::K;
+    OptD.T = Batch1::T;
+    OptD.r = Batch1::r;
+    OptD.sig = Batch1::sig; // initialize each member data with data in the batch
+    std::vector<double> asset_price = CutVec(10, 50, 1); // call Cut()
+    std::vector<double> call_price;
+    call_price.reserve(50); // reserve places for elements
+    std::vector<double> put_price;
+    put_price.reserve(50); // reserve places for elements
+    std::cout << "S |       Put  |      Call\n";
+    for (int i = 0; i != 40; i++) {
+        call_price.push_back(BSCallPrice(OptD, asset_price[i])); // calculate call price
+        put_price.push_back(BSPutPrice(OptD, asset_price[i])); // calculate put price
+        std::cout << asset_price[i]<<"|"  << std::setw(12)<<put_price[i]<<"|  " <<std::setw(12) << call_price[i]<<
+                   "\n"; // print the results
+    }
+    call_price.clear();
+    put_price.clear();
+    std::cout << "\n";
 
     std::cout << "A1 d)\n";
 
     // partd declare the neccessary containers of conditions change more variables
-    std::vector<double> rate_array = CutVec(0.02, 0.08, 0.02); // call Cut()
-    std::vector<double> maturity_array = CutVec(0.25, 2, 0.25); // Call Cut()
-    std::vector<double> volatility_array = CutVec(0.1, 0.5, 0.05); // Call Cut()
-    std::vector<double> strike_price_array = CutVec(50, 100, 10); // Call Cut()
-    std::vector<double> asset_price_array = CutVec(50, 60, 1); // Call Cut()
+    auto rate_array = CutVec(0.02, 0.08, 0.02); // Creates Array Using CutVec
+    auto maturity_array = CutVec(0.25, 2, 0.25); // Creates Array Using CutVec
+    auto volatility_array = CutVec(0.1, 0.5, 0.05); // Creates Array Using CutVec
+    auto strike_price_array = CutVec(50, 100, 10); // Creates Array Using CutVec
+    auto asset_price_array = CutVec(50, 60, 1); // Creates Array Using CutVec
 
     // containers of results
     std::vector<std::vector<double>> parameter_matrix;
-    int num = 20;
-    parameter_matrix.reserve(num); // reserve places for elements
+    std::vector<double> parameter_vector;
+    int matrix_num = 20;
+    int vector_num = 20;
+    parameter_matrix.reserve(matrix_num); // reserve places for elements
+    parameter_vector.reserve(vector_num); // reserve places for elements
     double rate = 0.0;
     // generate the random result from vector
-    for (int i = 0; i < num; i++) {
-        rate = rate_array[rand() % rate_array.size()];
-        parameter_matrix[i].push_back(rate);
-        parameter_matrix[i].push_back(volatility_array[rand() % volatility_array.size()]);
-        parameter_matrix[i].push_back(strike_price_array[rand() % 4]);
-        parameter_matrix[i].push_back(maturity_array[rand() % 4]);
-        parameter_matrix[i].push_back(rate);
-        parameter_matrix[i].push_back(asset_price_array[rand() % 4]);
+    for (int i = 0; i < matrix_num; i++) {
+        rate = rate_array[std::rand() % rate_array.size()];
+        parameter_vector.push_back(rate);
+        parameter_vector.push_back(volatility_array[std::rand() % volatility_array.size()]);
+        parameter_vector.push_back(strike_price_array[std::rand() % 4]);
+        parameter_vector.push_back(maturity_array[std::rand() % 4]);
+        parameter_vector.push_back(rate);
+        parameter_vector.push_back(asset_price_array[std::rand() % 4]);
+        parameter_matrix.push_back(parameter_vector);
+        parameter_vector.clear();
     };
-    EUoption option_matrix();
+    EUoption option_matrix(parameter_matrix, call_type); // create an object of EUoption
+    option_matrix.PriceWithMatrix(); // print the result
+    option_matrix.CalculateGreeksMatrix('D', 0);
+    option_matrix.CalculateGreeksMatrix('G', 0);
+    option_matrix.ShowMatrixPriceResult();
+    std::cout << "\n"; // print a new line
+    option_matrix.toggle(); // switch to put option
+    option_matrix.PriceWithMatrix();
+    option_matrix.CalculateGreeksMatrix('D', 0);
+    option_matrix.CalculateGreeksMatrix('G', 0);
+    option_matrix.ShowMatrixPriceResult();
+
+    // A2
+    // a) call and put future option greeks
+    std::cout << "\nA2 a) \n";
+    EUoption option(0.1, 0.36, 100.0, 0.5, 0.0, 105.0, 'C');
+    std::cout << "Call option Delta: " << option.Delta(0) << " and Gamma:" << option.Gamma(0) << "\n";
+    option.toggle(); // switch to put option
+    std::cout << "Put option Delta: " << option.Delta(0) << " and Gamma:" << option.Gamma(0) << "\n";
+
+    // test with difference h size to find optimal value
+    asset_price_array = CutVec(10, 50, 1);
+
+    std::vector<double> difference_array = {1, 0.1, 0.01, 0.001, 0.0001};
+    std::vector<double> call_delta_array;
+    std::vector<double> put_delta_array;
+
+    std::cout << "\nA2 b/c) Delta with different h\n";
+    std::cout << "  Analytical |   h = 1     |   h = 0.1   |   h = 0.01  |  h = 0.001  | h = 0.0001    \n";
+    for (auto i : asset_price_array) {
+        // Set option exercise price as K = 25
+        EUoption call_option(0.1, 0.36, i, 0.5, 0, 25, 'C');
+        std::cout << std::setw(12) << call_option.Delta(0) << " | ";
+        for (double h : difference_array) {
+            std::cout << std::setw(12) << call_option.ApprxDelta(25, h) << "| ";
+        }
+        std::cout << "\n";
+    }
+
+    std::cout << "\nA2 b/c) Gamma with different h\n";
+    std::cout << "  Analytical |   h = 1     |   h = 0.1   |   h = 0.01  |  h = 0.001  | h = 0.0001 \n";
+    for (auto i : asset_price_array) {
+        // Set option exercise price as K = 25
+        EUoption call_option(0.1, 0.36, i, 0.5, 0, 25, 'C');
+        std::cout << std::setw(12) << call_option.Gamma(0) << " | ";
+        for (double h : difference_array) {
+            std::cout << std::setw(12) << call_option.ApprxGamma(25, h) << "| ";
+        }
+        std::cout << "\n";
+    }
+
+    // d) Use h = 0.0001, calculate Greeks matrix again
+    std::cout << "\n A2 d) Use finite difference calculate again\n";
+    double h = 0.0001;
+    option_matrix.PriceWithMatrix();
+    option_matrix.CalculateGreeksMatrix('D', h);
+    option_matrix.CalculateGreeksMatrix('G', h);
+    option_matrix.ShowMatrixPriceResult();
+    option_matrix.toggle(); // switch to put option
+    option_matrix.PriceWithMatrix();
+    option_matrix.CalculateGreeksMatrix('D', h);
+    option_matrix.CalculateGreeksMatrix('G', h);
+    option_matrix.ShowMatrixPriceResult();
+
+    return 0;
 }
 
 // global functions function body
@@ -271,11 +308,11 @@ double PCParity(const OptionData &OptD, const double &S, const double &price, co
 
 // produces a mesh array of doubles separated by a mesh size h
 std::vector<double> CutVec(const double &start, const double &h, const double &size) {
-    std::vector<double> Proto; // declare the std::vector to be returned
-    Proto.reserve(size); // reserve places for elements
-    for (int i = 0; i != size; i++) // initialize elements according to requirement
-    {
-        Proto.push_back(start + h * i);
+    std::vector<double> mesh_array;
+    double value = start;
+    while (value <= h) {
+        mesh_array.push_back(value);
+        value += size;
     }
-    return Proto;
+    return mesh_array;
 }

@@ -8,10 +8,10 @@
 
 #ifndef OPTIONELE_H
 #define OPTIONELE_H
+#include <boost/math/distributions/normal.hpp>
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include <boost/math/distributions/normal.hpp>
 
 // namespaces and structs
 namespace Batch1 {
@@ -58,6 +58,6 @@ double PCParity(const OptionData &OptD, const double &S, const double &price, co
 
 // container modifying
 std::vector<double> CutVec(const double &start, const double &h,
-                      const double &size); // produces a mesh array of doubles separated by a mesh size h
+                           const double &size); // produces a mesh array of doubles separated by a mesh size h
 
 #endif
