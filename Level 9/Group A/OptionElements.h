@@ -58,6 +58,6 @@ double PCParity(const OptionData &OptD, const double &S, const double &price, co
 
 // container modifying
 std::vector<double> CutVec(const double &start, const double &h,
-                      const int &size); // produces a mesh array of doubles separated by a mesh size h
+                      const double &size); // produces a mesh array of doubles separated by a mesh size h
 
 #endif

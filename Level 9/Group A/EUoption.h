@@ -11,6 +11,11 @@ class EUoption {
 private:
     double b; //	varies according to different models
     char type; //	'C'-call/'P'-put
+    std::vector<std::vector<double>> parameter_matrix; // Parameter Matrix for better inputing
+    std::vector<double> delta_vector;
+    std::vector<double> gamma_vector;
+    std::vector<double> price_vector;
+
 public:
     //	public data members
     double K; //	strike price
@@ -21,6 +26,7 @@ public:
     //	constructors and destructor
     EUoption(); //	default constructor
     EUoption(double &K1, double &T1, double &r1, double &sig1, char &type1); //	constructor with parameters
+    EUoption(const std::vector<std::vector<double>> parameter_matrix, char &opt_type); // construct by matrix
     EUoption(const EUoption &source); //	copy constructor
     virtual ~EUoption(); //	destructor
 
@@ -46,6 +52,7 @@ public:
 
     //	friend
     friend double ParityPrice(const double &S, EUoption &source); //	calculate price according to put-call parity
+    void showMatrixPriceResult();
 };
 
 #endif

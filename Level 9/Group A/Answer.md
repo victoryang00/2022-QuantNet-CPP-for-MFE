@@ -24,3 +24,5 @@ Run the project and results are on the console.
 
 c)
 Run the project and results are on the console.
+
+d)

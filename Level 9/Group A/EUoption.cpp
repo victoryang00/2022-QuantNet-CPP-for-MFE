@@ -109,3 +109,6 @@ double ParityPrice(const double &S, EUoption &source) // calculate price accordi
         return (source.Price(S) + S - source.K * exp(-source.r * source.T)); // return parity call price
     }
 }
+// Construct from matrix
+EUoption::EUoption(const std::vector<std::vector<double>> parameter_matrix, char &opt_type)
+    : type(opt_type), parameter_matrix(parameter_matrix) {}
