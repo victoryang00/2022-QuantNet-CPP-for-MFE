@@ -150,8 +150,8 @@ int main() {
     for (int i = 0; i != 40; i++) {
         call_price.push_back(BSCallPrice(OptD, asset_price[i])); // calculate call price
         put_price.push_back(BSPutPrice(OptD, asset_price[i])); // calculate put price
-        std::cout << asset_price[i]<<"|"  << std::setw(12)<<put_price[i]<<"|  " <<std::setw(12) << call_price[i]<<
-                   "\n"; // print the results
+        std::cout << asset_price[i] << "|" << std::setw(12) << put_price[i] << "|  " << std::setw(12) << call_price[i]
+                  << "\n"; // print the results
     }
     call_price.clear();
     put_price.clear();
@@ -170,11 +170,11 @@ int main() {
     std::vector<std::vector<double>> parameter_matrix;
     std::vector<double> parameter_vector;
     int matrix_num = 20;
-    int vector_num = 20;
+    int vector_num = 6;
     parameter_matrix.reserve(matrix_num); // reserve places for elements
     parameter_vector.reserve(vector_num); // reserve places for elements
     double rate = 0.0;
-    // generate the random result from vector
+    // generate the random 1result from vector
     for (int i = 0; i < matrix_num; i++) {
         rate = rate_array[std::rand() % rate_array.size()];
         parameter_vector.push_back(rate);
@@ -210,10 +210,8 @@ int main() {
     asset_price_array = CutVec(10, 50, 1);
 
     std::vector<double> difference_array = {1, 0.1, 0.01, 0.001, 0.0001};
-    std::vector<double> call_delta_array;
-    std::vector<double> put_delta_array;
 
-    std::cout << "\nA2 b/c) Delta with different h\n";
+    std::cout << "\nA2 b) Delta with different h\n";
     std::cout << "  Analytical |   h = 1     |   h = 0.1   |   h = 0.01  |  h = 0.001  | h = 0.0001    \n";
     for (auto i : asset_price_array) {
         // Set option exercise price as K = 25
@@ -225,7 +223,7 @@ int main() {
         std::cout << "\n";
     }
 
-    std::cout << "\nA2 b/c) Gamma with different h\n";
+    std::cout << "\nA2 b) Gamma with different h\n";
     std::cout << "  Analytical |   h = 1     |   h = 0.1   |   h = 0.01  |  h = 0.001  | h = 0.0001 \n";
     for (auto i : asset_price_array) {
         // Set option exercise price as K = 25
@@ -236,6 +234,20 @@ int main() {
         }
         std::cout << "\n";
     }
+
+    std::cout << "\nA2 c) Delta with different h\n";
+    std::vector<std::vector<double>> parameter_matrix2;
+    parameter_matrix2.reserve(matrix_num);
+
+    for (auto i : asset_price_array) {
+        parameter_matrix2.push_back({0.1, 0.36, i, 0.5, 0, 25});
+    }
+    EUoption option_matrix2(parameter_matrix2, call_type); // create an object of EUoption
+    option_matrix2.PriceWithMatrix(); // print the result
+    option_matrix2.CalculateGreeksMatrix('D', 0);
+    option_matrix2.CalculateGreeksMatrix('G', 0);
+    option_matrix2.ShowMatrixPriceResult();
+    std::cout << "\n"; // print a new line
 
     // d) Use h = 0.0001, calculate Greeks matrix again
     std::cout << "\n A2 d) Use finite difference calculate again\n";
