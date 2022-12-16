@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.24)
 project(Group_F)
 
 set(CMAKE_CXX_STANDARD 14)
-find_package(Boost)
 
+find_package(Boost)
 include_directories(.)
 include_directories(../)
 
@@ -14,6 +14,9 @@ if (Boost_FOUND)
             FDMDirector.hpp
             main.cpp
             Mesher.hpp
+            ../UtilitiesDJD/VectorsAndMatrices/Vector.cpp
+            ../UtilitiesDJD/ExcelDriver/ExcelDriver.cpp
+            ../UtilitiesDJD/ExceptionClasses/DatasimException.cpp
             ParabolicPDE.hpp)
 
     target_link_libraries(Group_F ${Boost_LIBRARIES})

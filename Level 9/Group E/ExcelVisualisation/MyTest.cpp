@@ -34,10 +34,10 @@ vector<double> CutVec(const double& start, const double& h, const int& size);			
 int main()
 {
 	//	import parameters
-	//	using namespace Batch1;	//result: call:2,13337, put: 5.84628
-	//	using namespace Batch2; //result: call:7.96557, put:7.96557
-	//	using namespace Batch3; //result: call:0.204058, put:4.07326
-		using namespace Batch4; //result: call:92.1757, put:1.2475
+//		using namespace Batch1;	//result: call:2,13337, put: 5.84628
+//		using namespace Batch2; //result: call:7.96557, put:7.96557
+		using namespace Batch3; //result: call:0.204058, put:4.07326
+//		using namespace Batch4; //result: call:92.1757, put:1.2475
 	char type1='C'; char type2='P';
 
 	EUoption EUcall(K,T,r,sig,type1);

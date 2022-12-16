@@ -34,7 +34,7 @@
 
 #include "UtilitiesDJD/ExcelDriver/ExcelDriver.hpp"
 #include "UtilitiesDJD/VectorsAndMatrices/MatrixMechanisms.cpp" // template class
-#include "UtilitiesDJD/BitsAndPieces/StringConversions.hpp"
+//#include "UtilitiesDJD/BitsAndPieces/StringConversions.hpp"
 
 // Writes label and vector to cells in horizontal direction.
 void ExcelDriver::ToSheetHorizontal( Excel::_WorksheetPtr sheet, 
@@ -144,7 +144,7 @@ ExcelDriver& ExcelDriver::Instance()
 //  chartTitle:	title of chart
 //  xTitle:		label of x axis
 //  yTitle:		label of y axis
-void ExcelDriver::CreateChart(const Vector<double, long> & x, const list<std::string> & labels, const list<Vector<double, long> > & vectorList, 
+void ExcelDriver::CreateChart(const Vector<double, long> & x, const list<std::string> & labels, const list<Vector<double, long> > & vectorList,
 					const std::string& chartTitle, const std::string& xTitle, const std::string& yTitle)
 {
 		try
@@ -158,7 +158,7 @@ void ExcelDriver::CreateChart(const Vector<double, long> & x, const list<std::st
 			// Activate sheet with numbers.
 			Excel::_WorkbookPtr pWorkbook = xl->ActiveWorkbook;
 			Excel::_WorksheetPtr pSheet = pWorkbook->Worksheets->GetItem("Chart Data");
-			
+
 			// Calculate range with source data.
 			// The first row contains the labels shown in the chart's legend.
 			long beginRow = 1;
@@ -177,20 +177,20 @@ void ExcelDriver::CreateChart(const Vector<double, long> & x, const list<std::st
 			{
 				// Get label and row index.
 				string label = *labelIt;
-				
+
 				// Add label + output values to Excel.
 				ToSheetVertical(pSheet, 1, curDataColumn, label, *vectorIt);
 
 				// Advance row and label.
 				curDataColumn++;
 				labelIt++;
-		}			
-			
+		}
+
 			// Create range objects for source data.
 			Excel::RangePtr pBeginRange = pSheet->Cells->Item[beginRow][beginColumn];
 			Excel::RangePtr pEndRange = pSheet->Cells->Item[endRow][endColumn];
 			Excel::RangePtr pTotalRange = pSheet->Range[(Excel::Range*)pBeginRange][(Excel::Range*)pEndRange];
-			
+
 			// Create the chart and sets its type
 			Excel::_ChartPtr pChart=xl->ActiveWorkbook->Charts->Add();
 			pChart->ChartWizard((Excel::Range*)pTotalRange, (long)Excel::xlXYScatter, 6L, (long)Excel::xlColumns, 1L, 1L, true, chartTitle.c_str(), xTitle.c_str(), yTitle.c_str());
@@ -204,7 +204,7 @@ void ExcelDriver::CreateChart(const Vector<double, long> & x, const list<std::st
 			Excel::AxisPtr pAxis = pChart->Axes((long)Excel::xlValue, Excel::xlPrimary);
 			pAxis->HasTitle = true;
 			pAxis->AxisTitle->Text = yTitle.c_str();
-			
+
 			pAxis=pChart->Axes((long)Excel::xlCategory, Excel::xlPrimary);
 			pAxis->HasTitle = true;
 			pAxis->AxisTitle->Text = xTitle.c_str();

@@ -31,15 +31,37 @@ public:
 
 	Vector<V, I, S> operator - () const;		// Unary minus
 
-	friend Vector<V, I, S> operator + (const Vector<V, I, S>& v,const V& a);	// Add v to every element
+	friend Vector<V, I, S> operator + (const Vector<V, I, S>& v,const V& a){ // Add v to every element
+
+        // Create new vector of same size and same starting index
+        Vector<V, I, S> result(v.Size(), v.MinIndex());
+
+        // Copy all elements + v
+        for (I i = v.MinIndex(); i <= v.MaxIndex(); i++)
+            result[i] = v[i] + a;
+
+        // Return result
+        return result;
+    };	// Add v to every element
 
 	friend Vector<V, I, S> operator + (const V& a,	const Vector<V, I, S>& v);
 
-	friend Vector<V, I, S> operator - (const Vector<V, I, S>& v, const V& a);	// Subtract v from every element
+	friend Vector<V, I, S> operator - (const Vector<V, I, S>& v, const V& a){ // Subtract v from every element
+
+        // Create new vector of same size and same starting index
+        Vector<V, I, S> result(v.Size(), v.MinIndex());
+
+        // Copy all elements - v
+        for (I i = v.MinIndex(); i <= v.MaxIndex(); i++)
+            result[i] = v[i] - a;
+
+        // Return result
+        return result;
+    };	// Subtract v from every element
 
 	friend Vector<V, I, S> operator - (const V& a,	const Vector<V, I, S>& v);
 
-	friend Vector<V, I, S> operator * (const Vector<V, I, S>& v, 
+	friend Vector<V, I, S> operator * (const Vector<V, I, S>& v,
 										const V& a);	// Multiply every element by v
 
 	friend Vector<V, I, S> operator * (const V& a,	const Vector<V, I, S>& v);

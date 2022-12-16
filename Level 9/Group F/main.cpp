@@ -12,7 +12,7 @@
 #include <cmath>
 using namespace std;
 
-#include "UtilitiesDJD/ExcelDriver/ExcelMechanisms.cpp"
+#include "UtilitiesDJD/ExcelDriver/ExcelMechanisms.hpp"
 
 namespace BS // Black Scholes
 {
@@ -56,7 +56,6 @@ double myIC(double x) { // Payoff
 
 int main() {
     using namespace ParabolicIBVP;
-
     // Assignment of functions
     sigma = BS::mySigma;
     mu = BS::myMu;

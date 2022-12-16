@@ -14,7 +14,7 @@
 //
 
 
-#include "UtilitiesDJD/VectorsAndMatrices/Vector.cpp"
+#include "UtilitiesDJD/VectorsAndMatrices/Vector.hpp"
 #include "UtilitiesDJD/ExcelDriver/ExcelMechanisms.hpp"
 #include "UtilitiesDJD/Geometry/Range.cpp"
 #include "UtilitiesDJD/ExceptionClasses/DatasimException.hpp"
@@ -62,13 +62,13 @@ int main()
 	functionResult.push_back(vec1);
 	functionResult.push_back(vec2);
 	functionResult.push_back(vec3);
-	functionResult.push_back(vec4); 
-	
+	functionResult.push_back(vec4);
+
 	std::cout << "Data has been created\n";
 
-	try 
+	try
 	{
-		printInExcel(x,labels, functionResult, 
+		printInExcel(x,labels, functionResult,
 						string("All In One"), string("Time"), string("Value"));
 	}
 	catch(DatasimException& e)
